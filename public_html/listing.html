@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InstaTrash - New Listing</title>
+    <link rel="stylesheet" type="text/css" href="css/style_login.css">
+</head>
+<body>
+<header>
+    <div class="nav left">
+        <a class="title">InstaTrash - a motivational slogan</a>
+        <picture>
+            <img src="./img/logo.png" alt="Logo">
+        </picture>
+    </div>
+    <div class="nav right">
+        <button onclick="window.location.href='home.html'" class="header-home">Home</button>
+        <button onclick="window.location.href='listing.html'" class="header-listing">Create a listing</button>
+        <button onclick="window.location.href='login.html'" class="header-login" >Login/Register</button>
+    </div>
+</header>
+
+<div class="split login">
+    <div class="centered">
+        <h3>Add a listing</h3>
+        <form class="light-border"
+              enctype="multipart/form-data"
+              id="add-listing-form">
+            <input class="light-border" type="text" name="desc" placeholder="Description" required>
+            <input class="light-border" type="number" name="price" placeholder="Price" required>
+            <input class="light-border"
+                   type="file"
+                   name="trash"
+                   accept="image/*"
+                   placeholder="Choose file">
+            <button class="light-border" type="submit">Submit new listing</button>
+        </form>
+    </div>
+</div>
+<div class="split register">
+    <div class="centered">
+    </div>
+</div>
+
+<footer>
+    Here is the footer!
+</footer>
+</body>
+</html>
