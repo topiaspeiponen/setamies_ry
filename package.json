@@ -1,0 +1,9 @@
+{
+  "name": "setamies_ry",
+  "version": "1.0.0",
+  "dependencies": {},
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "mysql2": "^2.0.1"
+  }
+}
