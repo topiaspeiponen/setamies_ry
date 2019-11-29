@@ -2,9 +2,46 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Instatrash</title>
+    <title>Instatrash - Registration</title>
+    <link rel="stylesheet" type="text/css" href="css/style_registration.css">
 </head>
 <body>
+<div class="split login">
+    <div class="centered">
+        <h3>Login</h3>
+        <form id="login-form" class="light-border">
+            <div>
+                <label>Email:</label>
+                <input class="light-border" type="text" name="username"/>
+            </div>
+            <div>
+                <label>Password:</label>
+                <input class="light-border" type="password" name="password"/>
+            </div>
+            <div>
+                <button class="light-border" type="submit">Log In</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="split register">
+    <div class="centered">
+        <h3>Register</h3>
+        <form class="light-border" id="add-user-form">
+            <input class="light-border"
+                   type="text"
+                   name="name"
+                   pattern=".{3,}"
+                   placeholder="Name"
+                   required>
+            <input class="light-border" type="tel" name="number" placeholder="Phone number" required>
+            <input class="light-border" type="email" name="username" placeholder="Email" required>
+            <input class="light-border" type="password" name="password" pattern=".{6,}"
+                   placeholder="Password" required>
+            <button class="light-border" type="submit">Register</button>
+        </form>
+    </div>
+</div>
 
 </body>
 </html>
