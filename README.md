@@ -1,4 +1,4 @@
-# Setämies RY
+# Instatrash
 Project repository for group Setämies RY.
 
 ## Project
