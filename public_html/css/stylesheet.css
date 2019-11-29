@@ -1,0 +1,255 @@
+body {
+    display: inline-block;
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 24px;
+    color: #40552A;
+    background-color: #40552A;
+}
+
+header {
+    height: 15%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 5px;
+    transition: width, height 2s;
+}
+
+h3 {
+    color: #40552A;
+    font-size: 38px;
+}
+
+input, button, select {
+    display: inline-block;
+    width: 100%;
+    margin: .5em 0;
+}
+
+button {
+    background-color: #ccc;
+    color: #fff;
+}
+
+img {
+    height: 100px;
+    padding-left: 50px;
+}
+
+/*Main css*/
+.main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: wrap column;
+    overflow: hidden;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    display: flex;
+    height: 25%;
+    width: 30%;
+    margin: 3%;
+}
+
+.card_picture {
+    width: 100%;
+    height: 100%;
+}
+
+.card_description {
+    width: 100%;
+    height: 50%;
+}
+
+.card_price {
+    width: 100%;
+    height: 25%;
+}
+
+.card_location {
+    width: 100%;
+    height: 25%;
+}
+
+.no-split {
+    height: 85%;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: width, height 2s;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(64, 85, 42, 1) 0%, rgba(156, 167, 145, 1) 8%, rgba(194, 200, 187, 1) 15%, rgba(249, 250, 248, 1) 30%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 55%, rgba(248, 250, 248, 1) 70%, rgba(194, 200, 187, 1) 85%, rgba(156, 167, 145, 1) 92%, rgba(64, 85, 42, 1) 100%);
+
+}
+
+/* Split the screen in half */
+.split {
+    height: 85%;
+    width: 50%;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition: width, height 2s;
+    background: rgb(255, 255, 255);
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: left;
+    color: white;
+}
+
+/* Control the login panel */
+.login {
+    float: left;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(64, 85, 42, 1) 0%, rgba(156, 167, 145, 1) 16%, rgba(194, 200, 187, 1) 30%, rgba(249, 250, 248, 1) 60%, rgba(255, 255, 255, 1) 90%);
+}
+
+/* Control the register panel */
+.register {
+    right: 0;
+    background: rgb(255, 255, 255);
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 10%, rgba(249, 250, 248, 1) 40%, rgba(194, 200, 187, 1) 70%, rgba(156, 167, 145, 1) 84%, rgba(64, 85, 42, 1) 100%);
+}
+
+/* Control the listing panel */
+.listing {
+    float: bottom;
+}
+
+.left {
+    padding-right: 20px;
+    padding-left: 20px;
+    left: 0;
+    z-index: 2;
+}
+
+.right {
+    padding-right: 20px;
+    padding-left: 20px;
+    right: 0;
+    z-index: 2;
+}
+
+.header-left {
+    display: inline-block;
+    width: 50%;
+}
+
+.header-right {
+    float: right;
+    width: 50%;
+}
+
+.header-home {
+    font-size: 30px;
+    color: #40552A;
+    background-color: #C8C4B9;
+    height: 50%;
+    width: calc(100% / 3);
+    float: left;
+}
+
+.header-login {
+    font-size: 30px;
+    color: #40552A;
+    background-color: #C8C4B9;
+    height: 50%;
+    width: calc(100% / 3);
+    float: right;
+}
+
+.header-listing {
+    font-size: 30px;
+    color: #40552A;
+    background-color: #C8C4B9;
+    height: 50%;
+    width: calc(100% / 3);
+}
+
+.light-border {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 1em;
+    box-sizing: border-box;
+    color: #40552A;
+}
+
+.title {
+    font-family: 'Helvetica Neue', sans-serif;
+    font-size: 38px;
+    font-weight: bold;
+    color: #91AC43;
+    letter-spacing: -1px;
+    line-height: 1;
+    text-align: center;
+    padding-top: 25px;
+    padding-left: 25px;
+    float: left;
+}
+
+.button {
+    color: #C8C4B9;
+}
+
+/*Footer css*/
+.footer {
+    width: 100%;
+    height: 10vh;
+    float: bottom;
+}
+
+.footerText {
+    text-align: center;
+}
+
+@media only screen and (max-width: 768px) {
+    .split {
+        height: 30%;
+        width: 100%;
+        top: auto;
+        left: 0;
+    }
+
+    .nav {
+        height: 20%;
+        width: 100%;
+        bottom: auto;
+        left: 0;
+    }
+
+    .login {
+        background: rgb(56, 56, 56);
+        background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(33, 33, 185, 1) 7%, rgba(0, 212, 255, 1) 52%, rgba(255, 255, 255, 1) 100%);
+
+    }
+
+    .register {
+        background: rgb(255, 255, 255);
+        background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(210, 122, 122, 1) 15%, rgba(184, 47, 47, 1) 27%, rgba(172, 0, 0, 1) 100%);
+        right: auto;
+        bottom: 0;
+    }
+
+    .left {
+        top: 0;
+    }
+
+    .right {
+
+    }
+}
