@@ -52,19 +52,12 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.post('/register', checkNotAuthenticated, async (req, res, params) => {
+app.post('/register', checkNotAuthenticated, async (params, res) => {
     try {
-        const user = [];
-        users.push({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            password: hashedPassword
-        })
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        console.log(params);
         const [rows] = await promiselPool.execute(
             'INSERT INTO user (name, email, phone, password) VALUES (?, ?, ?, ?);',
-            user);
+            params);
         /*users.push({
             name: req.body.name,
             email: req.body.email,
@@ -73,6 +66,7 @@ app.post('/register', checkNotAuthenticated, async (req, res, params) => {
         });*/
         console.log(rows);
         res.redirect('/login');
+        return rows;
     } catch (e) {
         res.redirect('/register');
     }
