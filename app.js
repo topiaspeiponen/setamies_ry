@@ -1,5 +1,5 @@
 'use strict';
-const pool = require('../database/db');
+const pool = require('./database/db');
 const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
 const express = require('express');
@@ -37,7 +37,7 @@ app.use('/listings', listing);
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', {name: req.user.name});
-    });
+});
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs')
@@ -52,44 +52,48 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.post('/register', checkNotAuthenticated, async (params, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res, params) => {
     try {
+        const hashedPassword = await bcrypt.hash(req.body.password, 10);
         console.log(params);
-        const [rows] = await promiselPool.execute(
-            'INSERT INTO user (name, email, phone, password) VALUES (?, ?, ?, ?);',
-            params);
-        /*users.push({
-            name: req.body.name,
-            email: req.body.email,
-            phone: req.body.phone,
-            password: hashedPassword
-        });*/
+        const [rows] = await promisePool.execute(
+            'INSERT INTO user (username, email, phone, password) VALUES (?, ?, ?, ?);',
+          [
+        req.body.name,
+            req.body.email,
+            req.body.phone,
+            hashedPassword,
+        ]
+        );
         console.log(rows);
         res.redirect('/login');
         return rows;
     } catch (e) {
+        console.log(e);
         res.redirect('/register');
     }
     console.log(users);
 });
 
-app.delete('/logout', (req, res) =>{
-   req.logOut();
-   res.redirect('/login')
+app.delete('/logout', (req, res) => {
+    req.logOut();
+    res.redirect('/login')
 });
 
 function checkAuthenticated(req, res, next) {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return next()
     }
     res.redirect('/login');
 }
+
 function checkNotAuthenticated(req, res, next) {
-    if(req.isAuthenticated()){
+    if (req.isAuthenticated()) {
         return res.redirect('/')
     }
     return next()
 }
+
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 
 
