@@ -7,28 +7,28 @@ const promisePool = pool.promise();
 
 function initialize(passport, getUserByEmail) {
     const authenticateUser = async (email, password, done) => {
-        //TODO Login doesn't work yet, illegal arguments, undefined. Check arguments from which the sql query is made
-        let user;
+        const error = "wrong credential";
+        console.log("AuthenticateUser email, password and done: " + email, password, done);
         try {
-            const [row] = await promisePool.query(
+            const [row] = await promisePool.execute(
                 'SELECT * FROM user WHERE email = ?',
                 [email]
             );
-            user = [row];
-            console.log("Authenticate user: " + user);
-            console.log(user.password)
-        } catch(e) {
-            return done(null, false, {message: 'No user with that email!'});
-        }
-
-        try {
+            if(row[0] === undefined) {
+                return done(null, false, {message: error});
+            }
+            console.log("SQL query result for authentication: ", row[0].username, row[0].password);
+            const user = row[0];
             if (await bcrypt.compare(password, user.password)) {
+                delete user.password;
                 return done(null, user);
             } else {
-                return done(null, false, {message: 'Password incorrect'})
+                return done(null, false, {message: error});
             }
-        } catch (e) {
-            return done(e);
+        } catch(e) {
+            console.log(e);
+            //return done(null, false, {message: 'No user with that email!'});
+            return done(null, false, {message: error});
         }
     };
 

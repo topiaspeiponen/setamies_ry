@@ -13,6 +13,8 @@ const flash = require('express-flash');
 const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const listing = require("./routes/listingRoute");
+
+//Initializing Passport with a list of all users
 initializePassport(
     passport,
     email => {
@@ -20,7 +22,6 @@ initializePassport(
     }
 );
 
-const users = [];
 
 app.set('view-engine', 'ejs');
 app.use(cors());
@@ -101,16 +102,6 @@ const allUsers = async() =>{
             'SELECT * FROM user'
         );
         return row;
-    } catch(e) {
-        console.log(e);
-    }
-};
-const name = async() => {
-    try {
-        const [row] = await promisePool.query(
-            ''
-        );
-
     } catch(e) {
         console.log(e);
     }
