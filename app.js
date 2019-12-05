@@ -15,8 +15,10 @@ const initializePassport = require('./passport-config');
 const listing = require("./routes/listingRoute");
 initializePassport(
     passport,
-    email => users.find(user => user.email === email),
-    name => users.find(user => user.name === name));
+    email => {
+        allUsers().find(user => user.email === email)
+    }
+);
 
 const users = [];
 
@@ -93,6 +95,26 @@ function checkNotAuthenticated(req, res, next) {
     }
     return next()
 }
+const allUsers = async() =>{
+    try {
+        const [row] = await promisePool.query(
+            'SELECT * FROM user'
+        );
+        return row;
+    } catch(e) {
+        console.log(e);
+    }
+};
+const name = async() => {
+    try {
+        const [row] = await promisePool.query(
+            ''
+        );
+
+    } catch(e) {
+        console.log(e);
+    }
+};
 
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 

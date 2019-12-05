@@ -5,15 +5,18 @@ const bcrypt = require('bcryptjs');
 
 const promisePool = pool.promise();
 
-function initialize(passport, getUserByEmail, getUserByName) {
+function initialize(passport, getUserByEmail) {
     const authenticateUser = async (email, password, done) => {
+        //TODO Login doesn't work yet, illegal arguments, undefined. Check arguments from which the sql query is made
         let user;
         try {
             const [row] = await promisePool.query(
                 'SELECT * FROM user WHERE email = ?',
-                [getUserByEmail]
+                [email]
             );
             user = [row];
+            console.log("Authenticate user: " + user);
+            console.log(user.password)
         } catch(e) {
             return done(null, false, {message: 'No user with that email!'});
         }
