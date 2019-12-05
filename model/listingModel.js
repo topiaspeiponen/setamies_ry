@@ -14,6 +14,18 @@ const getAllListings = async() => {
     }
 };
 
+const getUsersListings = async(user_id) => {
+    try {
+        const [rows] = await promisePool.query(
+            'SELECT * FROM card'
+        );
+        return rows;
+    } catch(e) {
+        console.log('error', e.message);
+    }
+};
+
 module.exports = {
-    getAllListings
+    getAllListings,
+    getUsersListings
 };
