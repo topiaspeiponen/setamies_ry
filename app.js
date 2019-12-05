@@ -1,6 +1,4 @@
 'use strict';
-const pool = require('../database/db');
-const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -60,7 +58,7 @@ app.post('/register', checkNotAuthenticated, async (req, res, params) => {
             email: req.body.email,
             phone: req.body.phone,
             password: hashedPassword
-        })
+        });
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const [rows] = await promiselPool.execute(
             'INSERT INTO user (name, email, phone, password) VALUES (?, ?, ?, ?);',

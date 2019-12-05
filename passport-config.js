@@ -3,13 +3,21 @@ const pool = require('./database/db');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
+const promisePool = pool.promise();
+
 function initialize(passport, getUserByEmail, getUserByName) {
     const authenticateUser = async (email, password, done) => {
-        const user = getUserByEmail(email);
-        if(user == null){
-            return done(null, false, {message: 'No user with that email'});
+        let user;
+        try {
+            const [row] = await promisePool.query(
+                'SELECT * FROM user WHERE email = ?',
+                [getUserByEmail]
+            );
+            user = [row];
+        } catch(e) {
+            return done(null, false, {message: 'No user with that email!'});
         }
-        
+
         try {
             if (await bcrypt.compare(password, user.password)) {
                 return done(null, user);
