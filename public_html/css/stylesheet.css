@@ -22,6 +22,10 @@ h3 {
     font-size: 38px;
 }
 
+li {
+    cursor: pointer;
+}
+
 input, button, select {
     display: inline-block;
     width: 100%;
@@ -31,6 +35,10 @@ input, button, select {
 button {
     background-color: #ccc;
     color: #fff;
+}
+
+button:hover {
+    cursor:pointer;
 }
 
 img {
@@ -204,6 +212,10 @@ img {
 
 .button {
     color: #C8C4B9;
+}
+
+.button:hover {
+    cursor: pointer;
 }
 
 /*Footer css*/
