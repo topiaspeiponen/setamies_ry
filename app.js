@@ -1,4 +1,5 @@
 'use strict';
+const pool = require('../database/db');
 const dotenv = require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -50,6 +51,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        const
         users.push({
             name: req.body.name,
             email: req.body.email,
