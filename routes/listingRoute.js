@@ -11,4 +11,9 @@ router.use(function timeLog (req, res, next) {
 
 router.get("/", listingController.listing_get_all);
 
+router.get("/:id", async(req, res) => {
+    await listingController.listing_get_certain(req.params.id);
+    res.send(users_listings);
+});
+
 module.exports = router;

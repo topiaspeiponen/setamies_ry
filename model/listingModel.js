@@ -17,7 +17,8 @@ const getAllListings = async() => {
 const getUsersListings = async(user_id) => {
     try {
         const [rows] = await promisePool.query(
-            'SELECT * FROM card'
+            'SELECT * FROM card WHERE user_id = ?',
+            [user_id]
         );
         return rows;
     } catch(e) {
