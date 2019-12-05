@@ -54,10 +54,17 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 
 app.post('/register', checkNotAuthenticated, async (req, res, params) => {
     try {
+        const user = [];
+        users.push({
+            name: req.body.name,
+            email: req.body.email,
+            phone: req.body.phone,
+            password: hashedPassword
+        })
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
         const [rows] = await promiselPool.execute(
             'INSERT INTO user (name, email, phone, password) VALUES (?, ?, ?, ?);',
-            req.body.name, req.body.email, req.body.phone, hashedPassword );
+            user);
         /*users.push({
             name: req.body.name,
             email: req.body.email,
