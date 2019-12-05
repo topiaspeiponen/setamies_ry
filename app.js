@@ -1,5 +1,6 @@
 'use strict';
 const pool = require('../database/db');
+const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
 const express = require('express');
 const session = require('express-session');
@@ -51,16 +52,19 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.post('/register', checkNotAuthenticated, async (req, res) => {
+app.post('/register', checkNotAuthenticated, async (req, res, params) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        const
-        users.push({
+        const [rows] = await promiselPool.execute(
+            'INSERT INTO user (name, email, phone, password) VALUES (?, ?, ?, ?);',
+            req.body.name, req.body.email, req.body.phone, hashedPassword );
+        /*users.push({
             name: req.body.name,
             email: req.body.email,
             phone: req.body.phone,
             password: hashedPassword
-        });
+        });*/
+        console.log(rows);
         res.redirect('/login');
     } catch (e) {
         res.redirect('/register');
