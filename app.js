@@ -25,6 +25,7 @@ initializePassport(
 
 
 app.use(express.static("views"));
+app.use(express.static("public_html"));
 app.set('view-engine', 'ejs');
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
