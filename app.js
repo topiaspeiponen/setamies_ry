@@ -23,8 +23,9 @@ initializePassport(
     id => users.find(user => user.id === id)
 );
 
+
+app.use(express.static("views"));
 app.set('view-engine', 'ejs');
-app.use(express.static(__dirname + '/views'));
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
@@ -37,6 +38,18 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use('/listings', listing);
+
+
+
+app.get("/home", (req, res) => {
+    res.sendFile("./public_html/home.html", { root: __dirname })
+});
+app.get("/account", (req, res) => {
+    res.sendFile("./public_html/account.html", { root: __dirname })
+});
+app.get("/listing", (req, res) => {
+    res.sendFile("./public_html/listing.html", { root: __dirname })
+});
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', {name: req.user.name});
