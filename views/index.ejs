@@ -1,4 +1,29 @@
-<h1>Hi <%= name%></h1>
-<form action="/logout?_method=DELETE" method="post">
-    <button type="submit">Log out</button>
-</form>
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/head.ejs %>
+</head>
+<body>
+<header>
+    <% include partials/header.ejs %>
+</header>
+
+<div class="no-split">
+    <div id="main">
+
+    </div>
+    <div>
+        <h3>Hi <%= name%></h3>
+        <form action="/logout?_method=DELETE" method="post">
+            <button type="submit">Log out</button>
+        </form>
+    </div>
+</div>
+<footer>
+    <% include partials/footer.ejs %>
+</footer>
+</body>
+</html>
+
