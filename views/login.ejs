@@ -1,14 +1,37 @@
-<h1>Login</h1>
-<% if (messages.error) { %>
-<%= messages.error%>
-<% } %>
-<form action="/login" method="post">
-    <div>
-        <label for="email">Email</label>
-        <input type="text" id="email" name="email" required>
-        <label for="name">Password</label>
-        <input type="text" id="password" name="password" required>
+<!-- views/login.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/head.ejs %>
+</head>
+<body>
+<header>
+    <% include partials/header.ejs %>
+</header>
+
+<div class="no-split main">
+    <div class="centered">
+        <h3>Login</h3>
+        <% if (messages.error) { %>
+            <%= messages.error %>
+        <% } %>
+        <form action="/login" method="post" class="light-border">
+            <div>
+                <label for="email">Email</label>
+                <input class="light-border" type="text" id="email" name="email" required>
+                <label for="name">Password</label>
+                <input class ="light-border" type="text" id="password" name="password" required>
+            </div>
+            <div>
+                <button class="light-border" type="submit">Login</button>
+            </div>
+        </form>
+        <a href="/register">Register</a>
     </div>
-    <button type="submit">Login</button>
-</form>
-<a href="/register">Register</a>
+</div>
+<footer>
+    <% include partials/footer.ejs %>
+</footer>
+</body>
+</html>

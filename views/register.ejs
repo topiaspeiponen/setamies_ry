@@ -1,15 +1,44 @@
-<h1>Register</h1>
-<form action="/register" method="post">
-<div>
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
-    <label for="phone">Phone Number</label>
-    <input type="text" id="phone" name="phone" required>
-    <label for="password">Password</label>
-    <input type="text" id="password" name="password" required>
+<!-- views/register.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/head.ejs %>
+</head>
+<body>
+<header>
+    <% include partials/header.ejs %>
+</header>
+
+<div class="no-split main">
+    <div class="centered">
+        <h3>Register</h3>
+        <form action="/register" method="post" class="light-border">
+            <div>
+                <label for="name">Name</label>
+                <input class="light-border" type="text" id="name" name="name" required>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input class="light-border" type="email" id="email" name="email" required>
+            </div>
+            <div>
+                <label for="phone">Phone Number</label>
+                <input class="light-border" type="text" id="phone" name="phone" required>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input class="light-border" type="text" id="password" name="password" required>
+            </div>
+            <div>
+                <button class="light-border" type="submit">Register</button>
+            </div>
+        </form>
+        <a href="/login">Login</a>
+    </div>
 </div>
-    <button type="submit">Register</button>
-</form>
-<a href="/login">Login</a>
+<footer>
+    <% include partials/footer.ejs %>
+</footer>
+</body>
+</html>
