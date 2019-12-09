@@ -14,14 +14,15 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const listing = require("./routes/listingRoute");
 
-//Initializing Passport with a list of all users
+let users = [];
+allUsers();
+
 initializePassport(
     passport,
     email => users.find(user => user.email === email),
     id => users.find(user => user.id === id)
 );
 
-const users = allUsers();
 
 app.set('view-engine', 'ejs');
 app.use(cors());
@@ -101,16 +102,14 @@ async function allUsers() {
         const [row] = await promisePool.execute(
             'SELECT * FROM user'
         );
-        const jsonRow = [];
         row.forEach(user => {
-            jsonRow.push({
+            users.push({
                 id: user.id,
                 username: user.username,
                 email: user.email,
                 phone: user.phone
             });
         });
-        return jsonRow;
     } catch(e) {
         console.log(e);
     }
