@@ -23,8 +23,8 @@ initializePassport(
     id => users.find(user => user.id === id)
 );
 
-
 app.set('view-engine', 'ejs');
+app.use(express.static(__dirname + '/views'));
 app.use(cors());
 app.use(express.urlencoded({extended: false}));
 app.use(flash());
@@ -37,7 +37,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use('/listings', listing);
-
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', {name: req.user.name});

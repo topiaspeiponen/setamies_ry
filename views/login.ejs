@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Login</title>
     <%- include('partials/head') %>
-    <link rel="stylesheet" type="text/css" href="../public_html/css/stylesheet.css">
 </head>
 <body>
 <header>
@@ -15,7 +15,7 @@
     <div class="centered">
         <h3>Login</h3>
         <% if (messages.error) { %>
-            <%= messages.error %>
+            <%- messages.error %>
         <% } %>
         <form action="/login" method="post" class="light-border">
             <div>
