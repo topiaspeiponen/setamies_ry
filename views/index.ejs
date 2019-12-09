@@ -3,11 +3,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <% include partials/head.ejs %>
+    <%- include('partials/head') %>
+    <link rel="stylesheet" type="text/css" href="../public_html/css/stylesheet.css">
 </head>
 <body>
 <header>
-    <% include partials/header.ejs %>
+    <%- include('partials/header') %>
 </header>
 
 <div class="no-split">
@@ -22,7 +23,7 @@
     </div>
 </div>
 <footer>
-    <% include partials/footer.ejs %>
+    <%- include('partials/footer') %>
 </footer>
 </body>
 </html>
