@@ -17,11 +17,11 @@ const listing = require("./routes/listingRoute");
 //Initializing Passport with a list of all users
 initializePassport(
     passport,
-    email => {
-        allUsers().find(user => user.email === email)
-    }
+    email => users.find(user => user.email === email),
+    id => users.find(user => user.id === id)
 );
 
+const users = allUsers();
 
 app.set('view-engine', 'ejs');
 app.use(cors());
@@ -96,16 +96,25 @@ function checkNotAuthenticated(req, res, next) {
     }
     return next()
 }
-const allUsers = async() =>{
+async function allUsers() {
     try {
-        const [row] = await promisePool.query(
+        const [row] = await promisePool.execute(
             'SELECT * FROM user'
         );
-        return row;
+        const jsonRow = [];
+        row.forEach(user => {
+            jsonRow.push({
+                id: user.id,
+                username: user.username,
+                email: user.email,
+                phone: user.phone
+            });
+        });
+        return jsonRow;
     } catch(e) {
         console.log(e);
     }
-};
+}
 
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 

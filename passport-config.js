@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 const promisePool = pool.promise();
 
-function initialize(passport, getUserByEmail) {
+function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const error = "wrong credential";
         console.log("AuthenticateUser email, password and done: " + email, password, done);
