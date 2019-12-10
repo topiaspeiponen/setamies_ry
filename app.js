@@ -91,11 +91,11 @@ app.post('/account', async (req, res) => {
             ]
         );
         console.log(rows);
-        res.redirect('/accounts');
+        res.redirect('/account');
         return rows;
     } catch (e) {
         console.log(e);
-        res.redirect('/accounts');
+        res.redirect('/account');
     }
     console.log(users);
 });

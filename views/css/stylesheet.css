@@ -88,9 +88,17 @@ picture {
     padding-top: 1vw;
 }
 
+.card_name {
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
+}
+
 .card_description {
     width: 100%;
-    height: 100%;
+    height: 25%;
     text-align: center;
     font-size: calc(20px + 1vw);
     padding: 0.5vw;
@@ -105,6 +113,22 @@ picture {
 }
 
 .card_location {
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
+}
+
+.card_email {
+    width: 100%;
+    height: 25%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
+}
+
+.card_phone {
     width: 100%;
     height: 25%;
     text-align: center;
