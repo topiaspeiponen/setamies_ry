@@ -20,7 +20,7 @@ const createListings = async() => {
             const img = document.createElement("img");
             img.className = "card_picture";
             console.log(listing.picture);
-            img.src = "https://placekitten.com/200/287";
+            img.src = url + "/uploads/" + listing.picture;
 
             //Create element for card description
             const cardDesc = document.createElement("div");
