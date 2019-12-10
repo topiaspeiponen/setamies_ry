@@ -38,6 +38,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use('/listings', listing);
+app.use(function(req,res,next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 
@@ -51,7 +55,7 @@ app.get("/home_user", checkAuthenticated, (req, res) => {
 });
 
 app.get("/account", checkAuthenticated, (req, res) => {
-    res.sendFile("./public_html/account.html", { root: __dirname })
+    res.render('index.ejs')
 });
 app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
@@ -75,11 +79,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.get('/accounts', checkAuthenticated, (req, res) => {
-    res.render('index.ejs')
-});
-
-app.post('/accounts', async (req, res) => {
+app.post('/account', async (req, res) => {
     try {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
         const [rows] = await promisePool.execute(
