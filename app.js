@@ -19,7 +19,7 @@ allUsers();
 
 initializePassport(
     passport,
-    email => users.find(user => user.email === email),
+    email => users.find(user => (user.email === email)),
     id => users.find(user => user.id === id)
 );
 
@@ -41,7 +41,7 @@ app.use('/listings', listing);
 
 
 
-app.get("/home", (req, res) => {
+app.get("/home", checkNotAuthenticated, (req, res) => {
     res.sendFile("./public_html/home.html", { root: __dirname })
 });
 
@@ -58,7 +58,7 @@ app.get("/listing", checkAuthenticated, (req, res) => {
 
 
 app.get('/', checkAuthenticated, (req, res) => {
-    res.render('index.ejs', {name: req.user.name});
+    res.redirect('/home_user')
 });
 
 app.get('/login', checkNotAuthenticated, (req, res) => {
@@ -111,7 +111,7 @@ function checkAuthenticated(req, res, next) {
 
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
-        return res.redirect('/')
+        return res.redirect('/home')
     }
     return next()
 }
@@ -121,6 +121,7 @@ async function allUsers() {
             'SELECT * FROM user'
         );
         row.forEach(user => {
+            console.log("email: " + user.email);
             users.push({
                 id: user.id,
                 username: user.username,
