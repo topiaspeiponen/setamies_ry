@@ -38,6 +38,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride('_method'));
 app.use('/listings', listing);
+app.use(function(req,res,next){
+    res.locals.currentUser = req.user;
+    next();
+});
 
 
 
@@ -51,7 +55,7 @@ app.get("/home_user", checkAuthenticated, (req, res) => {
 });
 
 app.get("/account", checkAuthenticated, (req, res) => {
-    res.sendFile("./public_html/account.html", { root: __dirname })
+    res.render('index.ejs')
 });
 app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
@@ -75,10 +79,29 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.post('/register', checkNotAuthenticated, async (req, res, params) => {
+app.post('/account', async (req, res) => {
+    try {
+        const hashedpassword = await bcrypt.hash(req.body.password, 10);
+        const [rows] = await promisePool.execute(
+            'UPDATE user SET password = ? WHERE username = ?',
+            [
+                hashedpassword,
+                "beibonen",
+            ]
+        );
+        console.log(rows);
+        res.redirect('/accounts');
+        return rows;
+    } catch (e) {
+        console.log(e);
+        res.redirect('/accounts');
+    }
+    console.log(users);
+});
+
+app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log(params);
         const [rows] = await promisePool.execute(
             'INSERT INTO user (username, email, phone, password) VALUES (?, ?, ?, ?);',
           [
