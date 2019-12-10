@@ -41,6 +41,7 @@ app.use('/listings', listing);
 
 
 
+
 app.get("/home", checkNotAuthenticated, (req, res) => {
     res.sendFile("./public_html/home.html", { root: __dirname })
 });

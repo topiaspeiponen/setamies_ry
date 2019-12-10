@@ -17,8 +17,9 @@ const getAllListings = async() => {
 const postListing = async(user_id, name, picture, description, price, phone, email, location) => {
     try {
         await promisePool.query(
-            'INSERT INTO card VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
-            [0, user_id, name, picture, description,  price, phone, email, location]
+            'INSERT INTO card (user_id, name, picture, description, like, price, phone, email, location' +
+            ') VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [user_id, name, picture, description, 0, price, phone, email, location]
         )
     } catch(e) {
         console.log('error', e.message);

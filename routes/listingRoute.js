@@ -13,6 +13,6 @@ router.use(function timeLog (req, res, next) {
 
 router.get("/", listingController.listing_get_all);
 
-router.post("/", upload.single('file') ,listingController.listing_post);
+router.post("/", upload.single('picture') ,listingController.listing_post);
 
 module.exports = router;
