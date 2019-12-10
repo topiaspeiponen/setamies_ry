@@ -42,12 +42,24 @@ const createListings = async() => {
             cardLocation.className = "card_location";
             cardLocation.innerHTML = listing.location;
 
+            //Create element for card email (only for logged in users)
+            const cardEmail = document.createElement("div");
+            cardEmail.className = "card_email";
+            cardEmail.innerHTML = listing.email;
+
+            //Create element for card phone (only for logged in users)
+            const cardPhone = document.createElement("div");
+            cardPhone.className = "card_phone";
+            cardPhone.innerHTML = listing.phone;
+
             //Append all elements to the card and then to the main section
             card.appendChild(img);
             card.appendChild(cardName);
             card.appendChild(cardDesc);
             card.appendChild(cardPrice);
             card.appendChild(cardLocation);
+            card.appendChild(cardEmail);
+            card.appendChild(cardPhone);
 
             mainSection.appendChild(card);
         });
