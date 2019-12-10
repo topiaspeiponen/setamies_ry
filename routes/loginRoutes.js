@@ -4,7 +4,7 @@ module.exports = function(app, passport) {
     });
 
     app.get('/login', function(req, res){
-        res.render('login.html', {message:req.flash('loginMessage')});
+        res.render('login.ejs', {message:req.flash('loginMessage')});
     });
 
     app.post('/login', passport.authenticate('local-login', {
@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
         });
 
     app.get('/login', function(req, res){
-        res.render('login.html', {message: req.flash('signupMessage')});
+        res.render('login.ejs', {message: req.flash('signupMessage')});
     });
 
     app.post('/login', passport.authenticate('local-signup', {
