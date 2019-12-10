@@ -30,7 +30,7 @@ const createListings = async() => {
             //Create element for card price
             const cardPrice = document.createElement("div");
             cardPrice.className = "card_price";
-            cardPrice.innerHTML = listing.price;
+            cardPrice.innerHTML = listing.price + " €";
 
             //Create element for card location
             const cardLocation = document.createElement("div");

@@ -63,36 +63,53 @@ picture {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-flow: wrap column;
+    flex-direction: column;
     overflow: hidden;
+
+
 }
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1);
+    background-color: #C8C4B9;
     display: flex;
-    height: 25%;
-    width: 30%;
-    margin: 3%;
+    flex-flow: wrap column;
+    width: 40vw;
+    margin-left: 30vw;
+    margin-bottom: 6vw;
+    margin-top: 4vw;
+
 }
 
 .card_picture {
-    width: 100%;
-    height: 100%;
+    width: 24vw;
+    height: 24vw;
+    padding-left: 8vw;
+    padding-top: 1vw;
 }
 
 .card_description {
     width: 100%;
-    height: 50%;
+    height: 100%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
 }
 
 .card_price {
     width: 100%;
     height: 25%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
 }
 
 .card_location {
     width: 100%;
     height: 25%;
+    text-align: center;
+    font-size: calc(20px + 1vw);
+    padding: 0.5vw;
 }
 
 .no-split {
@@ -226,10 +243,7 @@ picture {
     letter-spacing: -1px;
     line-height: 1;
     text-align: center;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 120px;
-    padding-right: 25px;
+    padding: 15px 25px 15px 120px;
     float: right;
 }
 
