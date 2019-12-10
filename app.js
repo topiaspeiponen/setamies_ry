@@ -74,10 +74,33 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
-app.post('/register', checkNotAuthenticated, async (req, res, params) => {
+app.get('/accounts', checkAuthenticated, (req, res) => {
+    res.render('index.ejs')
+});
+
+app.post('/accounts', async (req, res) => {
+    try {
+        const hashedpassword = await bcrypt.hash(req.body.password, 10);
+        const [rows] = await promisePool.execute(
+            'UPDATE user SET password = ? WHERE username = ?',
+            [
+                hashedpassword,
+                "beibonen",
+            ]
+        );
+        console.log(rows);
+        res.redirect('/accounts');
+        return rows;
+    } catch (e) {
+        console.log(e);
+        res.redirect('/accounts');
+    }
+    console.log(users);
+});
+
+app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        console.log(params);
         const [rows] = await promisePool.execute(
             'INSERT INTO user (username, email, phone, password) VALUES (?, ?, ?, ?);',
           [
