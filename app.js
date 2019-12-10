@@ -23,7 +23,6 @@ initializePassport(
     id => users.find(user => user.id === id)
 );
 
-
 app.use(express.static("views"));
 app.use(express.static("public_html"));
 app.set('view-engine', 'ejs');
@@ -45,12 +44,18 @@ app.use('/listings', listing);
 app.get("/home", (req, res) => {
     res.sendFile("./public_html/home.html", { root: __dirname })
 });
-app.get("/account", (req, res) => {
+
+app.get("/home_user", checkAuthenticated, (req, res) => {
+    res.sendFile("./public_html/home-user.html", { root: __dirname })
+});
+
+app.get("/account", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/account.html", { root: __dirname })
 });
-app.get("/listing", (req, res) => {
+app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
 });
+
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.render('index.ejs', {name: req.user.name});
@@ -60,7 +65,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs')
 });
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
-    successRedirect: '/',
+    successRedirect: '/home_user',
     failureRedirect: '/login',
     failureFlash: true
 }));
@@ -127,7 +132,10 @@ async function allUsers() {
         console.log(e);
     }
 }
-
+module.exports = {
+    checkAuthenticated,
+    checkNotAuthenticated
+};
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 
 

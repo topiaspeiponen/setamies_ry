@@ -15,7 +15,7 @@
         </picture>
     </div>
     <div class="header-right">
-        <button onclick="window.location.href='/home'" class="header-home">Home</button>
+        <button onclick="window.location.href='/home_user'" class="header-home">Home</button>
         <button onclick="window.location.href='/listing'" class="header-listing">Create a listing</button>
         <button onclick="window.location.href='/login'" class="header-login">Login/Register</button>
     </div>
@@ -25,12 +25,17 @@
         <h3>Add a listing</h3>
         <form class="light-border"
               enctype="multipart/form-data"
+              action="/listings" method="post"
               id="add-listing-form">
-            <input class="light-border" type="text" name="desc" placeholder="Description" required>
+            <input class="light-border" type="text" name="name" placeholder="Object name" required>
+            <input class="light-border" type="text" name="description" placeholder="Description" required>
             <input class="light-border" type="number" name="price" placeholder="Price" required>
+            <input class="light-border" type="text" name="location" placeholder="Location" required>
+            <input class="light-border" type="text" name="email" placeholder="Email to contact" required>
+            <input class="light-border" type="text" name="phone" placeholder="Phone number to contact" required>
             <input class="light-border"
                    type="file"
-                   name="trash"
+                   name="picture"
                    accept="image/*"
                    placeholder="Choose file">
             <button class="light-border" type="submit">Submit new listing</button>
