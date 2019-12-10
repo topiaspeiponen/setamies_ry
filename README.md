@@ -6,7 +6,7 @@ A media sharing application focused on allowing users to share media of things t
 
 ## Running application
 - Git clone the repository
-- Run npm install
+- Run npm install to get all the dependencies for the project
 - Create .env file and fill out your database information here is the base model:
 - DB_HOST=
 - DB_USER=
