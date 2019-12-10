@@ -21,8 +21,10 @@
             <div>
                 <label for="email">Email</label>
                 <input class="light-border" type="text" id="email" name="email" required>
-                <label for="name">Password</label>
-                <input class ="light-border" type="text" id="password" name="password" required>
+                <label for="password">Password</label>
+                <input class ="light-border" type="password" id="password" name="password" required>
+                <label for="checkbox">Show Password</label>
+                <input class ="checkbox" type="checkbox" id="checkbox" onclick="showPassword()">
             </div>
             <div>
                 <button class="light-border" type="submit">Login</button>
@@ -35,4 +37,5 @@
     <%- include('partials/footer') %>
 </footer>
 </body>
+<script src="./js/password.js"></script>
 </html>
