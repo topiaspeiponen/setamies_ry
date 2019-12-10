@@ -14,6 +14,7 @@ const methodOverride = require('method-override');
 const initializePassport = require('./passport-config');
 const listing = require("./routes/listingRoute");
 
+//Getting all the current users and pushing them to the users array (registering a new user requires server restart ":-D"
 let users = [];
 allUsers();
 
@@ -42,6 +43,7 @@ app.use(function(req,res,next){
     res.locals.currentUser = req.user;
     next();
 });
+//Serve the uploads folder for use with the listings
 app.use("/uploads", express.static("uploads"));
 
 
