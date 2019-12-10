@@ -4,7 +4,7 @@ Project repository for group Setämies RY.
 ## Project
 A media sharing application focused on allowing users to share media of things they want to recycle. For example sharing pictures of old clothes or furniture to sell.
 
-##Running application
+## Running application
 Git clone the repository
 Run npm install
 Create .env file and fill out your database information here is the base model:
