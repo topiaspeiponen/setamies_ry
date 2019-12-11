@@ -12,6 +12,7 @@ header {
     position: fixed;
     z-index: 2;
     top: 0;
+    left: 0;
     overflow-x: hidden;
     padding-top: 5px;
     transition: width, height 2s;
@@ -145,7 +146,7 @@ img {
     margin-top: 200px;
     transition: width, height 2s;
     background: rgb(255, 255, 255);
-    background: linear-gradient(90deg, rgba(64, 85, 42, 1) 0%, rgba(156, 167, 145, 1) 8%, rgba(194, 200, 187, 1) 15%, rgba(249, 250, 248, 1) 30%, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 1) 55%, rgba(248, 250, 248, 1) 70%, rgba(194, 200, 187, 1) 85%, rgba(156, 167, 145, 1) 92%, rgba(64, 85, 42, 1) 100%);
+    background: linear-gradient(90deg, rgba(64, 85, 42, 1) 0%, rgba(156, 167, 145, 1) 8%, rgba(194, 200, 187, 1) 15%, rgba(249, 250, 248, 1) 30%, rgba(248, 250, 248, 1) 70%, rgba(194, 200, 187, 1) 85%, rgba(156, 167, 145, 1) 92%, rgba(64, 85, 42, 1) 100%);
 
 }
 
@@ -292,25 +293,54 @@ img {
     text-align: center;
 }
 
-@media only screen and (max-width: 768px) {
-    .login {
-        background: rgb(56, 56, 56);
-        background: linear-gradient(180deg, rgba(2, 0, 36, 1) 0%, rgba(33, 33, 185, 1) 7%, rgba(0, 212, 255, 1) 52%, rgba(255, 255, 255, 1) 100%);
-
+@media only screen and (max-width: 600px) {
+    header {
+        min-height: 110px;
+        max-height: 220px;
     }
 
-    .register {
-        background: rgb(255, 255, 255);
-        background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(210, 122, 122, 1) 15%, rgba(184, 47, 47, 1) 27%, rgba(172, 0, 0, 1) 100%);
-        right: auto;
-        bottom: 0;
+    .header-left {
+        display: none;
+    }
+    .header-right {
+        display: inline-block;
+        float: left;
+        width: 100%;
     }
 
-    .left {
-        top: 0;
+    .header-home {
+        font-size: calc(16px + 2vw);
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 50px;
+        min-height: 50px;
+        float: bottom;
     }
 
-    .right {
+    .header-login {
+        font-size: calc(16px + 2vw);
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 50px;
+        min-height: 50px;
+        float: bottom;
+    }
 
+    .header-listing {
+        font-size: calc(16px + 2vw);
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 50px;
+        min-height: 50px;
+        float: bottom;
+    }
+
+    .header-account {
+        font-size: calc(16px + 2vw);
+        max-width: 100%;
+        min-width: 100%;
+        max-height: 50px;
+        min-height: 50px;
+        float: bottom;
     }
 }
