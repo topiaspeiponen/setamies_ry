@@ -18,6 +18,7 @@ const listing = require("./routes/listingRoute");
 let users = [];
 allUsers();
 
+//Initialization for logging in
 initializePassport(
     passport,
     email => users.find(user => (user.email === email)),
@@ -49,21 +50,26 @@ app.use("/uploads", express.static("uploads"));
 
 
 
-
+// Home page route
 app.get("/home", checkNotAuthenticated, (req, res) => {
     res.sendFile("./public_html/home.html", { root: __dirname })
 });
 
+// Home page route for logged in users
 app.get("/home_user", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/home-user.html", { root: __dirname })
 });
 
+// Account page route
 app.get("/account", checkAuthenticated, (req, res) => {
     res.render('index.ejs')
 });
+
+// Listing page route
 app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
 });
+
 //Get likes from database
 app.get("/like/:id", checkAuthenticated, async(req, res) => {
     let like;
@@ -86,19 +92,24 @@ app.get("/like/:id", checkAuthenticated, async(req, res) => {
     }
 });
 
+// Route when opening the site with default url if you're logged in routes to home page for users
 app.get('/', checkAuthenticated, (req, res) => {
     res.redirect('/home_user')
 });
 
+// Login page route
 app.get('/login', checkNotAuthenticated, (req, res) => {
     res.render('login.ejs')
 });
+
+// Login post route
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
     successRedirect: '/home_user',
     failureRedirect: '/login',
     failureFlash: true
 }));
 
+// Register page route
 app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
@@ -148,11 +159,13 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
     console.log(users);
 });
 
+// Logout route
 app.delete('/logout', (req, res) => {
     req.logOut();
     res.redirect('/login')
 });
 
+// Function to check if you're logged in
 function checkAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
@@ -160,12 +173,15 @@ function checkAuthenticated(req, res, next) {
     res.redirect('/home');
 }
 
+// Function to check that you're logged in
 function checkNotAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return res.redirect('/home')
     }
     return next()
 }
+
+// async function to get all the current users in db
 async function allUsers() {
     try {
         const [row] = await promisePool.execute(

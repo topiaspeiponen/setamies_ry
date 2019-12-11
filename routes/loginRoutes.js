@@ -1,3 +1,5 @@
+
+// Routes for Login actions
 module.exports = function(app, passport) {
     app.get('/', function(req, res){
         res.render('home.html');

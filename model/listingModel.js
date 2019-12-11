@@ -3,6 +3,7 @@
 const pool = require('../database/db');
 const promisePool = pool.promise();
 
+// Getting all listings from database
 const getAllListings = async() => {
     try {
         const [rows] = await promisePool.query(
@@ -14,6 +15,7 @@ const getAllListings = async() => {
     }
 };
 
+// Posting new listings
 const postListing = async(user_id, name, picture, description, price, phone, email, location) => {
     try {
         await promisePool.query(
@@ -26,6 +28,7 @@ const postListing = async(user_id, name, picture, description, price, phone, ema
     }
 };
 
+// Getting users listings
 const getUsersListings = async(user_id) => {
     try {
         const [rows] = await promisePool.query(

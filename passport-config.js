@@ -4,7 +4,8 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
 const promisePool = pool.promise();
-let userid = "";
+
+//Authentication for users logging in
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const error = "wrong credential";
