@@ -75,9 +75,8 @@ img {
     display: flex;
     flex-flow: wrap column;
     width: 40vw;
-    margin-left: 30vw;
-    margin-bottom: 6vw;
-    margin-top: 4vw;
+    margin: auto;
+    padding: 1px;
 
 }
 
