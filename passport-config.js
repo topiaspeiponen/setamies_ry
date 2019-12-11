@@ -4,8 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcryptjs');
 
 const promisePool = pool.promise();
-
-
+let userid = "";
 function initialize(passport, getUserByEmail, getUserById) {
     const authenticateUser = async (email, password, done) => {
         const error = "wrong credential";
@@ -22,8 +21,6 @@ function initialize(passport, getUserByEmail, getUserById) {
             const user = row[0];
             if (await bcrypt.compare(password, user.password)) {
                 delete user.password;
-                let userid = user.id;
-                localStorage.setItem("userid", userid);
                 return done(null, user);
             } else {
                 return done(null, false, {message: error});
@@ -34,7 +31,6 @@ function initialize(passport, getUserByEmail, getUserById) {
             return done(null, false, {message: error});
         }
     };
-
     passport.use(new LocalStrategy({ usernameField: 'email' },
         authenticateUser));
     passport.serializeUser((user, done) => done(null, user.email));

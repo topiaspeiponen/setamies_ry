@@ -64,7 +64,27 @@ app.get("/account", checkAuthenticated, (req, res) => {
 app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
 });
-
+//Get likes from database
+app.get("/like/:id", checkAuthenticated, async(req, res) => {
+    let like;
+    try {
+        like = promisePool.execute(
+            'SELECT card.like WHERE id = ?',
+            [req.params.id]
+        )
+    } catch(e) {
+        console.log(e);
+    }
+    like +=1;
+    try {
+        await promisePool.execute(
+            'UPDATE card SET like = ? WHERE id = ?',
+            [like, req.params.id]
+        )
+    } catch(e) {
+        console.log(e);
+    }
+});
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.redirect('/home_user')
@@ -83,16 +103,16 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
+//Password change request path
 app.post('/account', async (req, res) => {
     try {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
-        let userid = localStorage.getItem("userid");
-        console.log("userid", userid);
+        console.log(hashedpassword);
         const [rows] = await promisePool.execute(
             'UPDATE user SET password = ? WHERE id = ?',
             [
-                hashedpassword,
-                userid,
+                req.body.password,
+                "beibonen",
             ]
         );
         console.log(rows);
@@ -105,6 +125,7 @@ app.post('/account', async (req, res) => {
     console.log(users);
 });
 
+//New user registration path
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);

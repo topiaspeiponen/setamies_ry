@@ -11,6 +11,8 @@ const createListings = async() => {
     try {
         const response = await fetch(url + "/listings");
         const listings = await response.json();
+        //Reverse listing so it's always newest to oldest
+        listings.reverse();
         listings.forEach((listing) => {
             //Create card element
             const card = document.createElement("div");
