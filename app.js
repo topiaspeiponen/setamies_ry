@@ -22,6 +22,7 @@ initializePassport(
     passport,
     email => users.find(user => (user.email === email)),
     id => users.find(user => user.id === id)
+
 );
 
 app.use(express.static("views"));
@@ -102,6 +103,7 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
     res.render('register.ejs')
 });
 
+//Password change request path
 app.post('/account', async (req, res) => {
     try {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
@@ -123,6 +125,7 @@ app.post('/account', async (req, res) => {
     console.log(users);
 });
 
+//New user registration path
 app.post('/register', checkNotAuthenticated, async (req, res) => {
     try {
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -183,7 +186,7 @@ async function allUsers() {
 }
 module.exports = {
     checkAuthenticated,
-    checkNotAuthenticated
+    checkNotAuthenticated,
 };
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 
