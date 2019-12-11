@@ -73,6 +73,7 @@ app.get("/listing", checkAuthenticated, (req, res) => {
 //Get likes from database
 app.get("/like/:id", checkAuthenticated, async(req, res) => {
     let like;
+    console.log(req.params.id);
     try {
         like = promisePool.execute(
             'SELECT card.like WHERE id = ?',
@@ -81,6 +82,7 @@ app.get("/like/:id", checkAuthenticated, async(req, res) => {
     } catch(e) {
         console.log(e);
     }
+    console.log("like route: " + like);
     like +=1;
     try {
         await promisePool.execute(
@@ -151,6 +153,7 @@ app.post('/register', checkNotAuthenticated, async (req, res) => {
         );
         console.log(rows);
         res.redirect('/login');
+        allUsers();
         return rows;
     } catch (e) {
         console.log(e);
@@ -187,6 +190,7 @@ async function allUsers() {
         const [row] = await promisePool.execute(
             'SELECT * FROM user'
         );
+        users = [];
         row.forEach(user => {
             console.log("email: " + user.email);
             users.push({

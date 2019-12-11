@@ -56,6 +56,7 @@ const createListings = async() => {
             //Create element for like button (only for logged in users)
             const cardLike = document.createElement("button");
             cardLike.onclick = "/like/" + listing.id;
+            console.log(listing.like);
             cardLike.innerHTML = "Likes: " + listing.like;
 
             //Append all elements to the card and then to the main section
