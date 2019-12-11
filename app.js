@@ -1,6 +1,4 @@
 'use strict';
-import {userid} from "./passport-config";
-
 const pool = require('./database/db');
 const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
@@ -24,6 +22,7 @@ initializePassport(
     passport,
     email => users.find(user => (user.email === email)),
     id => users.find(user => user.id === id)
+
 );
 
 app.use(express.static("views"));
@@ -87,6 +86,8 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 app.post('/account', async (req, res) => {
     try {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
+        let userid = localStorage.getItem("userid");
+        console.log("userid", userid);
         const [rows] = await promisePool.execute(
             'UPDATE user SET password = ? WHERE id = ?',
             [
@@ -164,7 +165,7 @@ async function allUsers() {
 }
 module.exports = {
     checkAuthenticated,
-    checkNotAuthenticated
+    checkNotAuthenticated,
 };
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 
