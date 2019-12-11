@@ -11,6 +11,7 @@ const createListings = async() => {
     try {
         const response = await fetch(url + "/listings");
         const listings = await response.json();
+        listings.reverse();
         listings.forEach((listing) => {
             //Create card element
             const card = document.createElement("div");
@@ -52,6 +53,11 @@ const createListings = async() => {
             cardPhone.className = "card_phone";
             cardPhone.innerHTML = listing.phone;
 
+            //Create element for like button (only for logged in users)
+            const cardLike = document.createElement("button");
+            cardLike.onclick = "/like/" + listing.id;
+            cardLike.innerHTML = "Likes: " + listing.like;
+
             //Append all elements to the card and then to the main section
             card.appendChild(img);
             card.appendChild(cardName);
@@ -60,6 +66,7 @@ const createListings = async() => {
             card.appendChild(cardLocation);
             card.appendChild(cardEmail);
             card.appendChild(cardPhone);
+            card.appendChild(cardLike);
 
             mainSection.appendChild(card);
         });

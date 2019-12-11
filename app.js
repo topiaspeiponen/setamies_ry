@@ -1,4 +1,6 @@
 'use strict';
+import {userid} from "./passport-config";
+
 const pool = require('./database/db');
 const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
@@ -22,7 +24,6 @@ initializePassport(
     passport,
     email => users.find(user => (user.email === email)),
     id => users.find(user => user.id === id)
-
 );
 
 app.use(express.static("views"));
@@ -64,7 +65,27 @@ app.get("/account", checkAuthenticated, (req, res) => {
 app.get("/listing", checkAuthenticated, (req, res) => {
     res.sendFile("./public_html/listing.html", { root: __dirname })
 });
-
+//Get likes from database
+app.get("/like/:id", checkAuthenticated, async(req, res) => {
+    let like;
+    try {
+        like = promisePool.execute(
+            'SELECT card.like WHERE id = ?',
+            [req.params.id]
+        )
+    } catch(e) {
+        console.log(e);
+    }
+    like +=1;
+    try {
+        await promisePool.execute(
+            'UPDATE card SET like = ? WHERE id = ?',
+            [like, req.params.id]
+        )
+    } catch(e) {
+        console.log(e);
+    }
+});
 
 app.get('/', checkAuthenticated, (req, res) => {
     res.redirect('/home_user')
@@ -165,7 +186,7 @@ async function allUsers() {
 }
 module.exports = {
     checkAuthenticated,
-    checkNotAuthenticated,
+    checkNotAuthenticated
 };
 app.listen(port, () => console.log(`Project app listening on port ${port}!`));
 
