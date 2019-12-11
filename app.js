@@ -1,6 +1,4 @@
 'use strict';
-import {userid} from "./passport-config";
-
 const pool = require('./database/db');
 const promisePool = pool.promise();
 const dotenv = require('dotenv').config();
@@ -107,13 +105,12 @@ app.get('/register', checkNotAuthenticated, (req, res) => {
 app.post('/account', async (req, res) => {
     try {
         const hashedpassword = await bcrypt.hash(req.body.password, 10);
-        let userid = localStorage.getItem("userid");
-        console.log("userid", userid);
+        console.log(hashedpassword);
         const [rows] = await promisePool.execute(
             'UPDATE user SET password = ? WHERE id = ?',
             [
-                hashedpassword,
-                userid,
+                req.body.password,
+                "beibonen",
             ]
         );
         console.log(rows);
